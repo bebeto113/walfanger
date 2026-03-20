@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-// Certifique-se de que o caminho da imagem está correto
 import DOPPELBOCK from '../../assets/DOPPELBOCK-e1716291411596-removebg-preview.png';
 
-// 1. DADOS ATUALIZADOS: Agora focados nas Linhas de Produto
+
 const beerLines = [
     {
         id: 1,
@@ -222,16 +221,28 @@ const BeerShowcase = () => {
 
                     {/* Indicadores (Bolinhas) */}
                     <div className="flex gap-3">
-                        {beerLines.map((_, index) => (
-                            <button
-                                key={index}
-                                onClick={() => {
-                                    setDirection(index > currentIndex ? 1 : -1);
-                                    setCurrentIndex(index);
-                                }}
-                                className={`h-1.5 transition-all duration-500 rounded-full ${index === currentIndex ? 'w-8 bg-[#c4a673]' : 'w-2 bg-[#dcd5c9] hover:bg-[#a39a8c]'}`}
-                            />
-                        ))}
+                        {beerLines.map((_, index) => {
+                            // Definimos as cores da Alemanha para cada índice
+                            const colors = [
+                                "bg-black",      // Bolinha 1: Preto
+                                "bg-[#d10000]",  // Bolinha 2: Vermelho
+                                "bg-[#ffcc00]"   // Bolinha 3: Amarelo/Ouro
+                            ];
+
+                            return (
+                                <button
+                                    key={index}
+                                    onClick={() => {
+                                        setDirection(index > currentIndex ? 1 : -1);
+                                        setCurrentIndex(index);
+                                    }}
+                                    className={`h-1.5 transition-all duration-500 rounded-full ${colors[index % 3]} ${index === currentIndex
+                                            ? 'w-8 opacity-100 shadow-sm'
+                                            : 'w-2 opacity-30 hover:opacity-60'
+                                        }`}
+                                />
+                            );
+                        })}
                     </div>
                 </div>
 
