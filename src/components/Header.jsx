@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 // Certifique-se de usar o logo correto (uma versão escura ou aplicar filtro via CSS)
 import Logo from '../assets/walfangerLogo-removebg-preview.png';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -39,26 +40,30 @@ const Header = () => {
     };
 
     const navLinks = [
-        { title: "Nossas Cervejas", href: "#cervejas" },
-        { title: "O Restaurante", href: "#restaurante" },
-        { title: "Nossa História", href: "#historia" },
-        { title: "Loja Online", href: "#loja" }
+        { title: "Nossas Cervejas", to: "/cervejas" },
+        { title: "O Restaurante", to: "/restaurante" },
+        { title: "Nossa História", to: "/historia" },
+        { title: "Loja Online", to: "/loja" }
     ];
 
     return (
         <>
+
             {/* CABEÇALHO SUPERIOR (Fixo e Limpo) */}
-            <header className="fixed top-0 left-0 w-full z-40 px-6 md:px-12 py-6 flex justify-between items-center transition-all duration-300">
+            {/* pointer-events-none no header para permitir cliques através do meio dele */}
+            <header className="fixed top-0 left-0 w-full z-40 px-6 md:px-12 py-6 flex justify-between items-center transition-all duration-300 pointer-events-none">
+
                 {/* Logo */}
-                <a href="#" className="relative z-50 cursor-pointer block">
-                    {/* Se o seu logo for branco, adicione 'filter brightness-0' no className abaixo para ficar escuro no fundo claro */}
+                {/* pointer-events-auto para que o logo volte a ser clicável */}
+                <Link to="/" className="relative z-50 cursor-pointer block pointer-events-auto">
                     <img src={Logo} alt="Walfänger" className="h-8 md:h-12 filter brightness-0" />
-                </a>
+                </Link>
 
                 {/* Botão de Menu (Hambúrguer) */}
+                {/* pointer-events-auto para que o botão volte a ser clicável */}
                 <button
                     onClick={() => setIsOpen(true)}
-                    className="relative z-40 flex items-center gap-4 group cursor-pointer bg-transparent border-none p-2"
+                    className="relative z-40 flex items-center gap-4 group cursor-pointer bg-transparent border-none p-2 pointer-events-auto"
                 >
                     <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#2a2622] group-hover:text-[#c4a673] transition-colors mt-0.5">
                         Menu
@@ -124,8 +129,8 @@ const Header = () => {
                             >
                                 {navLinks.map((link, i) => (
                                     <motion.div key={i} variants={linkVariants} className="w-full">
-                                        <a
-                                            href={link.href}
+                                        <Link
+                                            to={link.to}
                                             onClick={() => setIsOpen(false)}
                                             className="group w-full flex items-center justify-between py-6 md:py-8 border-b border-[#e3d8c1] cursor-pointer"
                                         >
@@ -139,7 +144,7 @@ const Header = () => {
                                                     <path d="M5 12h14M12 5l7 7-7 7" />
                                                 </svg>
                                             </span>
-                                        </a>
+                                        </Link>
                                     </motion.div>
                                 ))}
                             </motion.nav>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import DOPPELBOCK from '../../assets/DOPPELBOCK-e1716291411596-removebg-preview.png';
+import { useNavigate } from 'react-router-dom';
 
 
 const beerLines = [
@@ -17,7 +18,7 @@ const beerLines = [
     },
     {
         id: 2,
-        lineName: "Long Neck",
+        lineName: "Long Necks",
         representative: "Munich Helles",
         aroma: "Pão fresco, cereais e lúpulo floral suave.",
         abv: "5.0%",
@@ -28,7 +29,7 @@ const beerLines = [
     },
     {
         id: 3,
-        lineName: "Trigêmeos",
+        lineName: "Trigênios",
         representative: "Albert IPA",
         aroma: "Explosão de maracujá, cítrico e pinho.",
         abv: "6.5%",
@@ -42,6 +43,8 @@ const beerLines = [
 const BeerShowcase = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [direction, setDirection] = useState(1);
+
+    const navigate = useNavigate();
 
     const currentLine = beerLines[currentIndex];
 
@@ -214,7 +217,10 @@ const BeerShowcase = () => {
                     </div>
 
                     {/* Botão Principal Dinâmico */}
-                    <button className="group relative px-8 py-3.5 text-[#2c2825] uppercase tracking-[0.2em] text-[10px] md:text-xs font-bold transition-all overflow-hidden border border-[#2c2825] w-full max-w-xs md:w-auto">
+                    <button
+                        onClick={() => navigate('/cervejas', { state: { preSelectedLine: currentLine.lineName } })}
+                        className="group relative px-8 py-3.5 text-[#2c2825] uppercase tracking-[0.2em] text-[10px] md:text-xs font-bold transition-all overflow-hidden border border-[#2c2825] w-full max-w-xs md:w-auto"
+                    >
                         <span className="relative z-10 transition-colors group-hover:text-white">Explorar Linha {currentLine.lineName}</span>
                         <div className="absolute inset-0 bg-[#2c2825] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]" />
                     </button>
@@ -237,8 +243,8 @@ const BeerShowcase = () => {
                                         setCurrentIndex(index);
                                     }}
                                     className={`h-1.5 transition-all duration-500 rounded-full ${colors[index % 3]} ${index === currentIndex
-                                            ? 'w-8 opacity-100 shadow-sm'
-                                            : 'w-2 opacity-30 hover:opacity-60'
+                                        ? 'w-8 opacity-100 shadow-sm'
+                                        : 'w-2 opacity-30 hover:opacity-60'
                                         }`}
                                 />
                             );

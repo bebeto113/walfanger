@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 // Assets
-import BARRIL_IMG from '../../assets/barril-walfanger-removebg-preview.png';
-import GROWLER_IMG from '../../assets/growler-walfanger.png';
+import BARRIL_IMG from '../../assets/Barril-de-Chopp-Walfanger-e1715620200945.webp';
+import GROWLER_IMG from '../../assets/Growler-walfanger.webp';
 
 const Takeaway = () => {
     // Componente auxiliar para a linha tripla minimalista
@@ -147,12 +147,12 @@ const Takeaway = () => {
                             initial={{ opacity: 0, scale: 0.9 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
-                            className="relative w-full flex justify-center lg:hidden mb-8"
+                            className=" w-full h-full flex justify-center items-center lg:hidden mb-8"
                         >
                             <img
                                 src={GROWLER_IMG}
                                 alt="Growler Walfänger"
-                                className="w-[65%] max-w-[280px] object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.1)]"
+                                className="w-fit h-fit  drop-shadow-[0_30px_50px_rgba(0,0,0,0.15)]"
                             />
                         </motion.div>
 
